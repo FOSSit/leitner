@@ -1,5 +1,32 @@
 from quests import cards
 from random import randint
+import signal
+import sys
+
+def signal_handler(signal, frame):
+    print('You pressed Ctrl+C!')
+    # Perform cleanup here
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+class Question:
+    def __init__(self, text, options):
+        self.text = text
+        self.options = options
+
+    def display(self):
+        print("\n" + self.text)
+        for i, option in enumerate(self.options, 1):
+            print(f"{i}. {option}")
+
+questions = [
+    Question("What is the capital of France?", ["Paris", "London", "Berlin"]),
+    Question("What is the capital of England?", ["Paris", "London", "Berlin"]),
+]
+
+for question in questions:
+    question.display()
+
 
 def main():
     slots = (list(cards.items()), [], [])
@@ -37,6 +64,8 @@ def main():
             k = input("Exit? (N/y): ")
             if o and o[0].lower() == "y":
                 break
+
+    
 
 if __name__ == "__main__":
     main()
