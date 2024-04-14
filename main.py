@@ -39,6 +39,7 @@ def main():
                 k = input("Exit? (N/y): ")
                 if o and o[0].lower() == "y":
                     break
+                
     except KeyboardInterrupt:
         print("\nExiting")
 
