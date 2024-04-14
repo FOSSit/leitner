@@ -30,7 +30,8 @@ def main():
         elif option[0].lower() == "N":
             box_index = max(box_index - 1, 0)
         else:
-            break
+            print("Invalid input. Please enter 'Y' or 'N'.")
+            continue
         slots[box_index].append((question, answer))
         if len(cards) == len(slots[-1]):
             print(f" You have memorised all {len(cards)} cards")
