@@ -1,6 +1,27 @@
 from quests import cards
 from random import randint
 
+def print_card(question, answer):
+    def count_spaces(s):
+        count = 0
+        for i in s:
+            if i.isspace():
+                count += 1
+        return count
+
+    q_spaces = count_spaces(question)
+    a_spaces = count_spaces(answer)
+
+    question = question.strip()
+    answer = answer.strip()
+
+    border_len = max(len(question), len(answer)) 
+    print("+" + "-" * border_len + "+")
+    print("|" + question +  (" " * (border_len - len(question))) +  "|")
+    print("+" + "-" * border_len + "+")
+    print("|" + answer + (" " * (border_len - len(answer))) + "|")
+    print("+" + "-" * border_len + "+")
+
 def main():
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
@@ -20,7 +41,9 @@ def main():
         q, a = box.pop(n // box_chance_mul[box_idx])
         print(chr(27) + "[2J")
         # print(box_idx, f, n)
-        print(q)
+
+        print_card(q,a)
+
         print("-" * 4)
         input("Answer: ")
         o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
