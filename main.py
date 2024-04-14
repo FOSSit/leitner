@@ -2,6 +2,7 @@ from quests import cards
 from random import randint
 
 def main():
+    score=0
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
     while True:
@@ -22,14 +23,21 @@ def main():
         # print(box_idx, f, n)
         print(q)
         print("-" * 4)
-        input("Answer: ")
+        try:
+            input("Answer: ")
+        except:
+            print("KeyboardInterrupt. Exiting.")
+            break
         o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
+        if(o=='y'):
+           score= score+1
         print("=" * 5)
         if not o or o[0].lower() == "y":
             box_idx = min(box_idx + 1, len(slots) - 1)
         elif o[0].lower() == "n":
             box_idx = max(box_idx - 1, 0)
         else:
+            print(f"your Score was {score}")
             break
         slots[box_idx].append((q, a))
         if len(cards) == len(slots[-1]):
