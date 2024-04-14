@@ -18,7 +18,7 @@ def main():
                 break
         box = slots[box_index]
         question, answer = box.pop(n // box_chance_multiplier[box_index])
-        print(chr(27) + "[2J")
+        print(chr(27) + "[2J]")
         # print(box_index, f, n)
         print(question)
         print("~" * 10)
