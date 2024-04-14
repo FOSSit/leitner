@@ -1,7 +1,9 @@
 from quests import cards
 from random import randint
+import sys
 
 def main():
+    global result
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
     while True:
@@ -24,6 +26,8 @@ def main():
         print("-" * 4)
         input("Answer: ")
         o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
+        if o=='y' or o=='Y':
+            result += 1
         print("=" * 5)
         if not o or o[0].lower() == "y":
             box_idx = min(box_idx + 1, len(slots) - 1)
@@ -39,4 +43,9 @@ def main():
                 break
 
 if __name__ == "__main__":
-    main()
+    result = 0
+    try:
+        main()
+    except KeyboardInterrupt:
+        print(f'\nYou answered {result} flash cards correctly.')
+        sys.exit(0)
