@@ -1,42 +1,68 @@
 from quests import cards
 from random import randint
 
+
 def main():
+    # Initialize slots for cards
     slots = (list(cards.items()), [], [])
+
+    # Multiplier for box chance
     box_chance_mul = [4, 2, 1]
+
     while True:
-        wts = [len(i) * box_chance_mul[idx] for idx, i in enumerate(slots)]
-        f = randint(1, sum(wts)) - 1
+        # Calculate weights for each box
+        weights = [len(slot) * mul for slot, mul in zip(slots, box_chance_mul)]
+        
+        # Choose a random number
+        random_num = randint(1, sum(weights)) - 1
+
+        # Determine the box index and card index
         box_idx = 0
-        a = 0
-        n = 0
-        for idx, i in enumerate(wts):
-            a += i
-            if f < a:
+        accum = 0
+        card_idx = 0
+        for idx, weight in enumerate(weights):
+            accum += weight
+            if random_num < accum:
                 box_idx = idx
-                n = f - a + i
+                card_idx = random_num - accum + weight
                 break
-        box = slots[box_idx]
-        q, a = box.pop(n // box_chance_mul[box_idx])
+        
+        # Select the box and the card
+        selected_box = slots[box_idx]
+        question, answer = selected_box.pop(card_idx // box_chance_mul[box_idx])
+
+        # Clear the screen
         print(chr(27) + "[2J")
-        # print(box_idx, f, n)
-        print(q)
+
+        # Print question
+        print(question)
         print("-" * 4)
+
+        # Get user's answer
         input("Answer: ")
-        o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
+
+        # Check if the user's answer is correct
+        user_answer = input(f"The answer was: {answer}\nWere you correct? (Y/n/exit): ")
         print("=" * 5)
-        if not o or o[0].lower() == "y":
+
+        # Determine the next box index based on user's response
+        if not user_answer or user_answer[0].lower() == "y":
             box_idx = min(box_idx + 1, len(slots) - 1)
-        elif o[0].lower() == "n":
+        elif user_answer[0].lower() == "n":
             box_idx = max(box_idx - 1, 0)
         else:
             break
-        slots[box_idx].append((q, a))
+
+        # Move the card to the appropriate box
+        slots[box_idx].append((question, answer))
+
+        # Check if all cards are memorized
         if len(cards) == len(slots[-1]):
-            print(f"You have memorised all {len(cards)} cards")
-            k = input("Exit? (N/y): ")
-            if o and o[0].lower() == "y":
+            print(f"You have memorized all {len(cards)} cards")
+            exit_choice = input("Exit? (N/y): ")
+            if exit_choice and exit_choice[0].lower() == "y":
                 break
+
 
 if __name__ == "__main__":
     main()
