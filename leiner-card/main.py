@@ -1,12 +1,6 @@
 from quests import cards
 from random import randint
 
-def clear_page():
-    print("\n" * 50)  # Adjust the number of newlines as needed for your terminal size
-
-def format_question(question):
-    return f"Question: {question}"
-
 def main():
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
@@ -24,16 +18,16 @@ def main():
                 break
         box = slots[box_idx]
         q, a = box.pop(n // box_chance_mul[box_idx])
-        clear_page()
-        print(format_question(q))
-        print("-" * len(format_question(q)))
+        print(chr(27) + "[2J")
+        print(q)
+        print("-" * 4)
         user_answer = input("Answer: ")
-        print("=" * 5)
         print(f"The answer was: {a}")
-        o = input("Were you correct? (Y/n/exit): ")
-        if not o or o[0].lower() == "y":
+        is_correct = input("Were you correct? (Y/n/exit): ")
+        print("=" * 5)
+        if not is_correct or is_correct[0].lower() == "y":
             box_idx = min(box_idx + 1, len(slots) - 1)
-        elif o[0].lower() == "n":
+        elif is_correct[0].lower() == "n":
             box_idx = max(box_idx - 1, 0)
         else:
             break
