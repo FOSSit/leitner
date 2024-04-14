@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[project]
+name = "leitner"
+version = "0.1.0"
+description = "A flashcard application using the Leitner system."
+
+[project.scripts]
+leitner = "main:main"
