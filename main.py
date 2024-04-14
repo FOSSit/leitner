@@ -18,24 +18,24 @@ def main():
                 break
         box = slots[box_idx]
         q, a = box.pop(n // box_chance_mul[box_idx])
-        print(chr(27) + "[2J")
+        print(chr(27) + "2J")
         # print(box_idx, f, n)
         print(q)
-        print("-" * 4)
-        input("Answer: ")
-        o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
-        print("=" * 5)
-        if not o or o[0].lower() == "y":
+        print("~" * 10)
+        input("The answer is : ")
+        o = input(f" The answer was : {a}\n Was the answer correct? (Y/N) : ")
+        print("~" * 10)
+        if not o or o[0].lower() == "Y":
             box_idx = min(box_idx + 1, len(slots) - 1)
-        elif o[0].lower() == "n":
+        elif o[0].lower() == "N":
             box_idx = max(box_idx - 1, 0)
         else:
             break
         slots[box_idx].append((q, a))
         if len(cards) == len(slots[-1]):
-            print(f"You have memorised all {len(cards)} cards")
-            k = input("Exit? (N/y): ")
-            if o and o[0].lower() == "y":
+            print(f" You have memorised all {len(cards)} cards")
+            k = input("Do you want to exit? (Y/N) : ")
+            if o and o[0].lower() == "Y":
                 break
 
 if __name__ == "__main__":
