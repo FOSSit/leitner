@@ -17,7 +17,7 @@ class Question:
     def display(self):
         print("\n" + self.text)
         for i, option in enumerate(self.options, 1):
-            print(f"{i}. {option}")
+            print(f"{i}. {option}") 
 
 questions = [
     Question("What is the capital of France?", ["Paris", "London", "Berlin"]),
