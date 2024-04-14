@@ -1,9 +1,11 @@
 from quests import cards
 from random import randint
+from collections import defaultdict
 
 def main():
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
+    incorrect_count = defaultdict(int)  # Dictionary to keep track of incorrect answers
     while True:
         wts = [len(i) * box_chance_mul[idx] for idx, i in enumerate(slots)]
         f = randint(1, sum(wts)) - 1
@@ -19,10 +21,11 @@ def main():
         box = slots[box_idx]
         q, a = box.pop(n // box_chance_mul[box_idx])
         print(chr(27) + "[2J")
-        # print(box_idx, f, n)
         print(q)
         print("-" * 4)
-        input("Answer: ")
+        user_input = input("Answer: ")
+        if user_input != a:
+            incorrect_count[q] += 1  # Increment count for incorrect answer
         o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
         print("=" * 5)
         if not o or o[0].lower() == "y":
@@ -37,6 +40,11 @@ def main():
             k = input("Exit? (N/y): ")
             if o and o[0].lower() == "y":
                 break
+
+    print("\nTop 5 Hardest Cards:")
+    sorted_cards = sorted(incorrect_count.items(), key=lambda x: x[1], reverse=True)[:5]
+    for i, (card, count) in enumerate(sorted_cards, 1):
+        print(f"{i}. {card}: {count} incorrect answers")
 
 if __name__ == "__main__":
     main()
