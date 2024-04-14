@@ -1,12 +1,20 @@
 from quests import cards
 from random import randint
 
+def choose_random():
+    return randint(1, sum(wts)) - 1
+
+def print_question(q):
+    print(q)
+    print(chr(27) + "[2J")
+    # print(box_idx, f, n)
+    print("-" * 4)
+ 
 def main():
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
     while True:
         wts = [len(i) * box_chance_mul[idx] for idx, i in enumerate(slots)]
-        f = randint(1, sum(wts)) - 1
         box_idx = 0
         a = 0
         n = 0
@@ -16,12 +24,10 @@ def main():
                 box_idx = idx
                 n = f - a + i
                 break
+        f = choose_random()
         box = slots[box_idx]
         q, a = box.pop(n // box_chance_mul[box_idx])
-        print(chr(27) + "[2J")
-        # print(box_idx, f, n)
         print(q)
-        print("-" * 4)
         input("Answer: ")
         o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
         print("=" * 5)
