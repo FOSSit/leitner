@@ -1,4 +1,4 @@
-from quests import cards
+from leitner.quests import cards
 from random import randint
 
 def main():

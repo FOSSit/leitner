@@ -1,0 +1,8 @@
+[leitner]
+name = "leitner"
+version = "1.0.0"
+description = ""
+authors = ["FOSSitAuthors <FOSSitAuthors@example.com>"]
+readme = "README.md"
+language = "Python"
+version = 3.9
