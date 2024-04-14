@@ -1,5 +1,6 @@
 from quests import cards
 from random import randint
+import sys
 
 def main():
     slots = (list(cards.items()), [], [])
@@ -39,4 +40,7 @@ def main():
                 break
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(1)
