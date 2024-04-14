@@ -1,6 +1,6 @@
 from quests import cards
 from random import randint
-import sys
+import sys, os
 
 def main():
     global result
@@ -20,7 +20,11 @@ def main():
                 break
         box = slots[box_idx]
         q, a = box.pop(n // box_chance_mul[box_idx])
-        print(chr(27) + "[2J")
+        if 'nt' in os.name:
+            os.system('cls')
+        else:
+            os.system('clear')
+        # print(chr(27) + "[2J")
         # print(box_idx, f, n)
         print(q)
         print("-" * 4)
