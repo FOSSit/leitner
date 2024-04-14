@@ -40,7 +40,7 @@ def main():
                 if o and o[0].lower() == "y":
                     break
     except KeyboardInterrupt:
-        print("\nExiting Gracefully")
+        print("\nExiting")
 
 if __name__ == "__main__":
     main()
