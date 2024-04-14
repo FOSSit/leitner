@@ -20,10 +20,14 @@ def main():
             box = slots[box_idx]
             q, a = box.pop(n // box_chance_mul[box_idx])
             print(chr(27) + "[2J")
+            print("Question:")
+            print("=" * 15)
             print(q)
-            print("-" * 4)
-            input("Answer: ")
-            o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
+            print("-" * 15)
+            input("Press Enter to reveal the answer...")
+            print("The answer is:", a)
+            input("\nPress Enter to continue...")
+            o = input("Were you correct? (Y/n/exit): ")
             print("=" * 5)
             if not o or o[0].lower() == "y":
                 box_idx = min(box_idx + 1, len(slots) - 1)
@@ -33,7 +37,7 @@ def main():
                 break
             slots[box_idx].append((q, a))
             if len(cards) == len(slots[-1]):
-                print(f"You have memorised all {len(cards)} cards")
+                print(f"You have memorized all {len(cards)} cards")
                 k = input("Exit? (N/y): ")
                 if o and o[0].lower() == "y":
                     break
