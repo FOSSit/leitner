@@ -22,7 +22,12 @@ def main():
         # print(box_idx, f, n)
         print(q)
         print("-" * 4)
-        input("Answer: ")
+        try:
+            input("Answer: ")
+        except:
+            print("KeyboardInterrupt. Exiting.")
+            break
+        
         o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
         print("=" * 5)
         if not o or o[0].lower() == "y":
