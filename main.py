@@ -1,14 +1,15 @@
+
 from quests import cards
 from random import randint
+import os
 
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 def main():
-      sorted_cards = sorted(cards.items(), key=lambda x: x[1])
-    print("Top 5 Hardest Cards:")
-    for idx, (card, value) in enumerate(sorted_cards[:5], start=1):
-        print(f"{idx}. {card}: {value}")
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
     while True:
+        clear_screen()
         wts = [len(i) * box_chance_mul[idx] for idx, i in enumerate(slots)]
         f = randint(1, sum(wts)) - 1
         box_idx = 0
@@ -22,24 +23,26 @@ def main():
                 break
         box = slots[box_idx]
         q, a = box.pop(n // box_chance_mul[box_idx])
-        print(chr(27) + "[2J")
-        # print(box_idx, f, n)
+        
         print(q)
         print("-" * 4)
         input("Answer: ")
-        o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
+        user_answer =input("Answer: ")
+        clear_screen()
+        print(f"The answer was: {a}")
         print("=" * 5)
-        if not o or o[0].lower() == "y":
+        if user_answer.lower() == a.lower():
+            print("Correct")
             box_idx = min(box_idx + 1, len(slots) - 1)
-        elif o[0].lower() == "n":
+        else
+            print("Incorrect!")
             box_idx = max(box_idx - 1, 0)
-        else:
-            break
+        imput("Press Enter to continue..")
         slots[box_idx].append((q, a))
         if len(cards) == len(slots[-1]):
             print(f"You have memorised all {len(cards)} cards")
             k = input("Exit? (N/y): ")
-            if o and o[0].lower() == "y":
+            if k.lower() == "y":
                 break
 
 if __name__ == "__main__":
