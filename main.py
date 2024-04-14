@@ -7,20 +7,20 @@ def clear_screen():
 
 def display_question(question):
     clear_screen()
-    print(question)
-    print("-" * 4)
+    print("========================================")
+    print(f"\t\tQuestion\n{'=' * 40}\n{question}\n{'=' * 40}")
 
 def get_user_answer():
-    return input("Answer: ")
+    return input("\nAnswer: ")
 
 def display_correct_answer(answer):
-    print(f"The answer was: {answer}\n")
+    print(f"\nThe correct answer was: {answer}\n")
 
 def get_user_feedback():
     return input("Were you correct? (Y/n/exit): ").lower()
 
 def display_completion_message(num_cards):
-    print(f"You have memorised all {num_cards} cards")
+    print(f"\nCongratulations! You have memorised all {num_cards} cards.")
 
 def main():
     slots = (list(cards.items()), [], [])
@@ -66,3 +66,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
