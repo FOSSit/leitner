@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "leitner"
+version = "1.0.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+[project.scripts]
+leitner = "main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
