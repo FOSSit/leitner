@@ -1,4 +1,4 @@
-from quests import cards
+from leitner.quests import cards
 from random import randint
 import sys, os
 
@@ -62,10 +62,14 @@ class leitner:
                 if o and o[0].lower() == "y":
                     break
 
-if __name__ == "__main__":
+
+def main():
     leitnerObj = leitner()
     try:
         leitnerObj.leitner()
     except KeyboardInterrupt:
         print(f'\nYou answered {leitnerObj.result} cards correctly.')
         sys.exit(0)
+
+if __name__=="__main__":
+    main()

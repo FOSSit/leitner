@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "leitner"
+version = "1.0"
+description = "create installer packages"
+
+[project.scripts]
+leitner = 'leitner.leitner:main'
