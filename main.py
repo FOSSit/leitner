@@ -1,6 +1,15 @@
 from quests import cards
 from random import randint
 
+def print_card(question, answer):
+    """Prints a card with a border and centered text."""
+    border_length = max(len(question), len(answer)) + 4
+    print("+" + "-" * border_length + "+")
+    print("|" + question.center(border_length - 2) + "|")
+    print("+" + "-" * border_length + "+")
+    print("|" + answer.center(border_length - 2) + "|")
+    print("+" + "-" * border_length + "+")
+
 def main():
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
@@ -19,8 +28,9 @@ def main():
         box = slots[box_idx]
         q, a = box.pop(n // box_chance_mul[box_idx])
         print(chr(27) + "[2J")
-        # print(box_idx, f, n)
-        print(q)
+        
+        print_card(q, a)
+        
         print("-" * 4)
         input("Answer: ")
         o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
