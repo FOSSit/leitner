@@ -22,8 +22,11 @@ def get_user_feedback():
 def display_completion_message(num_cards):
     print(f"\nCongratulations! You have memorised all {num_cards} cards.")
 
+def sort_cards_by_difficulty(cards):
+    return sorted(cards.items(), key=lambda x: len(x[1]))
+
 def main():
-    slots = (list(cards.items()), [], [])
+    slots = (sort_cards_by_difficulty(cards), [], [])
     box_chance_mul = [4, 2, 1]
     
     while True:
