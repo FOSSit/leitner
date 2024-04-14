@@ -1,6 +1,12 @@
 from quests import cards
 from random import randint
 
+def clear_page():
+    print("\n" * 50)  # Adjust the number of newlines as needed for your terminal size
+
+def format_question(question):
+    return f"Question: {question}"
+
 def main():
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
@@ -18,13 +24,13 @@ def main():
                 break
         box = slots[box_idx]
         q, a = box.pop(n // box_chance_mul[box_idx])
-        print(chr(27) + "[2J")
-        # print(box_idx, f, n)
-        print(q)
-        print("-" * 4)
-        input("Answer: ")
-        o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
+        clear_page()
+        print(format_question(q))
+        print("-" * len(format_question(q)))
+        user_answer = input("Answer: ")
         print("=" * 5)
+        print(f"The answer was: {a}")
+        o = input("Were you correct? (Y/n/exit): ")
         if not o or o[0].lower() == "y":
             box_idx = min(box_idx + 1, len(slots) - 1)
         elif o[0].lower() == "n":
@@ -34,8 +40,8 @@ def main():
         slots[box_idx].append((q, a))
         if len(cards) == len(slots[-1]):
             print(f"You have memorised all {len(cards)} cards")
-            k = input("Exit? (N/y): ")
-            if o and o[0].lower() == "y":
+            exit_choice = input("Exit? (N/y): ")
+            if exit_choice and exit_choice[0].lower() == "y":
                 break
 
 if __name__ == "__main__":
