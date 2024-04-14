@@ -1,6 +1,9 @@
 from quests import cards
 from random import randint
 
+def format_card(card):
+    return f"Question:\n{card[0]}\n{'-' * 20}\nAnswer: {card[1]}"
+
 def main():
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
@@ -19,11 +22,9 @@ def main():
         box = slots[box_idx]
         q, a = box.pop(n // box_chance_mul[box_idx])
         print(chr(27) + "[2J")
-        # print(box_idx, f, n)
-        print(q)
-        print("-" * 4)
-        input("Answer: ")
-        o = input(f"The answer was: {a}\nWere you correct? (Y/n/exit): ")
+        print(format_card((q, a)))
+        input("Press Enter to reveal the answer...")
+        o = input("Were you correct? (Y/n/exit): ")
         print("=" * 5)
         if not o or o[0].lower() == "y":
             box_idx = min(box_idx + 1, len(slots) - 1)
