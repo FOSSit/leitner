@@ -2,6 +2,10 @@ from quests import cards
 from random import randint
 
 def main():
+      sorted_cards = sorted(cards.items(), key=lambda x: x[1])
+    print("Top 5 Hardest Cards:")
+    for idx, (card, value) in enumerate(sorted_cards[:5], start=1):
+        print(f"{idx}. {card}: {value}")
     slots = (list(cards.items()), [], [])
     box_chance_mul = [4, 2, 1]
     while True:
